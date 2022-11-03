@@ -1,0 +1,5 @@
+- hosts: opsdevt
+  user: root
+ 
+  roles:
+   - linuxfororacle_prep
