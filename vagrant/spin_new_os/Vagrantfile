@@ -43,7 +43,7 @@ Vagrant.configure(2) do |config|
         end
       end
       node.vm.provision "shell", inline: <<-SHELL
-        sh /vagrant/scripts/setup.sh
+        sh /vagrant_scripts/setup.sh
       SHELL
     end
   end
