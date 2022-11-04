@@ -1,0 +1,25 @@
+- name: copy database  install file to the target database server
+  become_user: oracle 
+  when: inventory_hostname in groups['opsdevt']
+  #remote_user: "{{ root_user }}"
+  copy: src={{ item }} dest={{ stage_dir }} mode=0775 force=no
+  with_items:
+    - "/Users/duyhanhnguyen/Downloads/software/LINUX.X64_213000_db_home.zip"
+- name: Extract Oracle binary files to stage-area
+  unarchive:
+    src={{ oracle_stage }}/{{ item[0].filename }}
+    dest={{ ORACLE_HOME }}
+    copy=no
+    creates="{{ oracle_stage }}/{{ item[0].version }}/{{ item[0].creates}}"
+  with_nested:
+    - "{{oracle_sw_image_db}}"
+    - "" # dummy to force item.0 instead of item.
+  become: yes
+  become_user: "{{ oracle_user }}"
+  run_once: "{{ configure_cluster}}"
+  when: 
+    - item[0].version == "{{version}}"
+    # - oracle_sw_copy
+    # - oracle_sw_unpack
+  tags:
+    - oradbswunpack

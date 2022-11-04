@@ -1,0 +1,8 @@
+- hosts: opsdevt
+  user: root
+ 
+  roles:
+   - linuxfororacle_prep
+   - setup
+   - oraswdb-install
+

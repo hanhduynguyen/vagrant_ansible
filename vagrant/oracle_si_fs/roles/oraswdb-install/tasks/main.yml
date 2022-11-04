@@ -1,0 +1,31 @@
+---
+# ==============================================================================
+# Manage User Equivalency between all nodes of a cluster
+# Configuring Network Time Protocol (NTPD)
+# Setting shell limits
+# 1. Set kernel parameters
+# 2. Install required operating system packages
+# 3. Disable firewalls
+# 4. Create necessary OS groups and users
+# 5. Create necessary OS users
+# 6. Set up shell limit for oracle user 
+# 7. Set up shell limit for grid user 
+# 8. Update /etc/hosts file entry  
+# 9. Create required directories
+# 10.configure user equivalence 
+# 11. Install Oracle Pre-Install RPM 
+# 12. Editing profile entries
+# ==============================================================================
+
+- name: display pre installation of setting up Oracle Database Software requirements into the Linux OS
+  debug:
+    msg:
+      - 'This playbook is for setting setting up Oracle Database Software requirement {{ansible_date_time.iso8601}}:'
+
+
+- name: Preparation tasks for hosting Oracle database
+  block:
+    - import_tasks: setup_oracle_software.yaml
+    - import_tasks: createdb.yaml
+  become:               yes
+  become_user:          root

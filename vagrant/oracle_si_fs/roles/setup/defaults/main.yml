@@ -1,0 +1,25 @@
+oracle_home_db: "{%- if oracle_databases is defined -%}
+                    {%- if db_homes_config[oracle_databases.home]['oracle_home'] is defined  -%}
+                         {{db_homes_config[oracle_databases.home]['oracle_home']}}
+                    {%- else -%}
+                         {{oracle_base}}/{{db_homes_config[oracle_databases.home]['version']}}/{{db_homes_config[oracle_databases.home]['home']}}
+                    {%- endif -%}
+                 {%- elif item.0 is defined -%}
+                    {%- if db_homes_config[item.0.home]['oracle_home'] is defined  -%}
+                         {{db_homes_config[item[0].home]['oracle_home']}}
+                    {%- else -%}
+                         {{oracle_base}}/{{db_homes_config[item.0.home]['version']}}/{{db_homes_config[item.0.home]['home']}}
+                    {%- endif -%}
+                 {%- elif item[1] is defined -%}
+                    {%- if db_homes_config[item[1].home]['oracle_home'] is defined  -%}
+                         {{db_homes_config[item[1].home]['oracle_home']}}
+                    {%- else -%}
+                         {{oracle_base}}/{{db_homes_config[item[1].home]['version']}}/{{db_homes_config[item[1].home]['home']}}
+                    {%- endif -%}
+                 {%- elif item is defined -%}
+                    {%- if db_homes_config[item.home]['oracle_home'] is defined  -%}
+                         {{db_homes_config[item.home]['oracle_home']}}
+                    {%- else -%}
+                         {{oracle_base}}/{{db_homes_config[item.home]['version']}}/{{db_homes_config[item.home]['home']}}
+                    {%- endif -%}
+                 {%- endif -%}"

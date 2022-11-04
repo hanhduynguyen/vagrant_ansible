@@ -1,0 +1,48 @@
+---
+# defaults file for oraswdb-install
+### Create db
+dbca_templatename: General_Purpose.dbc
+oracle_databases:                                            # Dictionary describing the databases to be installed
+  - home: dbhome_1                                            # 'Last' directory in ORACLE_HOME path (e.g /u01/app/oracle/12.1.0.2/racdb)
+    oracle_version_db: 21.3.0                          # Oracle versiono
+    oracle_edition: EE                                   # The edition of database-server (EE,SE,SEONE)
+    oracle_db_name: orclcdb                           # Database name
+    oracle_db_type: SI                                   # Type of database (RAC,RACONENODE,SI)
+    is_container: True                                  # (true/false) Is the database a container database
+    pdb_prefix: pdb
+    num_pdbs: 1
+    storage_type: FS                                     # Database storage to be used. ASM or FS.
+    service_name: orclcdb_serv                              # Inital service to be created (not in use yet)
+    oracle_init_params: ""                               # Specific parameters to be set during installation. Comma-separated list
+    oracle_db_mem_totalmb: 1024                          # Amount of RAM to be used for SGA + PGA
+    oracle_database_type: MULTIPURPOSE                   # MULTIPURPOSE|DATA_WAREHOUSING|OLTP
+    redolog_size_in_mb: 100
+    listener_name: LISTENER
+    state: present   
+    autostartup_service: True
+
+dbca_templatename: General_Purpose.dbc
+
+dbpasswords:
+    orcl:
+    sys: Oracle_456
+    system: Oracle_456
+    dbsnmp: Oracle_456
+    pdbadmin: Oracle_456
+oracle_stage: /u02/stage
+oracle_rsp_stage: "{{ oracle_stage }}/rsp"
+oracle_dbca_rsp: "dbca_{{ item.0.oracle_db_name }}.rsp" 
+default_dbpass: password
+datafile_dest: /u02/oracle/oradata
+recoveryfile_dest: /u02/oracle/fra
+default_gipass: passwords
+dbca_initParams: "{% if '12.2' in item.0.oracle_version_db %} -initParams db_name={{item.0.oracle_db_name}}{% if item.0.oracle_db_unique_name is defined %},db_unique_name={{item.0.oracle_db_unique_name}}{% endif %}{% endif %}"
+dbh:
+  oracle_db_name: orclcdb
+  oracle_db_type: SI
+  is_container: true
+  default_dbpass: password
+  redolog_size_in_mb: 100
+  pdb_local_undo: true
+
+redolog_size_in_mb: 100

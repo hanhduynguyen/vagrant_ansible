@@ -1,0 +1,10 @@
+- name: display pre installation of setting up Oracle Database Software requirements into the Linux OS
+  debug:
+    msg:
+      - 'This playbook is for setting setting up Oracle Database Software requirement {{ansible_date_time.iso8601}}:'
+- name: Preparation tasks for hosting Oracle database
+  block:
+    - import_tasks: copy_software.yaml
+    - import_tasks: prep_rsp_file.yml
+  become:               yes
+  become_user:          root

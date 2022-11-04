@@ -1,0 +1,48 @@
+---
+  - name: Recursively remove 19c oraInventory directory if it exists
+    become: yes
+    become_user: oracle
+    file:
+      path: "{{item}}"
+      state: absent
+    with_items:
+      - "{{oracle_base}}"
+      - "{{ORA_INVENTORY}}"
+
+  - name: Remove /etc/oraInst.loc file if it exists
+    file:
+      path: /etc/oraInst.loc
+      state: absent
+  # - name: Run 19c execute Prereqs Installer command
+  #   command: "{{ORACLE_HOME}}/runInstaller  -executePrereqs -silent -responseFile {{responseFile}} -waitForCompletion"
+  #   become: yes
+  #   become_user: oracle
+
+  - name: Run 19c Installer command
+    command: "{{ORACLE_HOME}}/runInstaller  -silent -responseFile {{responseFile}} -waitForCompletion"
+    become: yes
+    become_user: oracle
+
+  - name: Run orainstRoot.sh command
+    command: "{{ORA_INVENTORY}}/orainstRoot.sh"
+    become: yes
+    become_user: root
+
+  - name: Run root.sh command
+    command: "{{ORACLE_HOME}}/root.sh"
+    become: yes
+    become_user: root
+  
+  - name: Add PATH  to .bash_profile
+    blockinfile:
+      path: /home/oracle/.bash_profile
+      block: |
+        export ORACLE_HOME21c={{ORACLE_HOME}}
+        export ORACLE_HOME=$ORACLE_HOME21c
+        export PATH=$PATH:$ORACLE_HOME/bin
+        export ORACLE_SID=orclcdb
+        export TNS_ADMIN={{ORACLE_HOME}}/network/admin
+
+  - name: Source the bash_profile file
+    action: shell source /home/oracle/.bash_profile
+    become_user: oracle

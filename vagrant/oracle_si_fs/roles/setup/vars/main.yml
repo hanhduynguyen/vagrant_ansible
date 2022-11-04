@@ -1,0 +1,45 @@
+---
+# vars file for setup
+root_dir: /u02
+oracle_binary: /Users/duyhanhnguyen/Downloads/software/LINUX.X64_213000_db_home.zip
+stage_dir: /u02/stage
+oracle_stage: /u02/stage
+oracle_user: oracle
+oracle_base: /u02/app
+configure_cluster: true
+oracle_tmp: /tmp
+oracle_base: /u01/app/oracle
+version: 21.3.0.0
+db_homes_config:
+  21300-base:
+    home: db1-base
+    version: 21.3.0.0
+    edition: EE
+oracle_sw_image_db:
+  - { filename: LINUX.X64_213000_db_home.zip, version: 21.3.0.0, creates: 'install/.img.bin' }
+  - { filename: LINUX.X64_193000_db_home.zip, version: 19.3.0.0, creates: 'install/.img.bin' }
+  - { filename: LINUX.X64_180000_db_home.zip, version: 18.3.0.0, creates: 'install/.img.bin' }
+  - { filename: linuxx64_12201_database.zip, version: 12.2.0.1, creates: 'database/runInstaller' }
+  - { filename: linuxamd64_12102_database_1of2.zip, version: 12.1.0.2, creates: 'database/stage/sizes/oracle.server.Custom.sizes.properties' }
+  - { filename: linuxamd64_12102_database_2of2.zip, version: 12.1.0.2, creates: 'database/install/.oui' }
+  - { filename: linuxamd64_12c_database_1of2.zip, version: 12.1.0.1, creates: 'database/runInstaller' }
+  - { filename: linuxamd64_12c_database_2of2.zip, version: 12.1.0.1, creates: 'database/runInstaller' }
+  - { filename: p13390677_112040_Linux-x86-64_1of7.zip, version: 11.2.0.4, creates: 'database/install/resource/cons_zh_TW.nls' }
+  - { filename: p13390677_112040_Linux-x86-64_2of7.zip, version: 11.2.0.4, creates: 'database/stage/Components/oracle.db/11.2.0.4.0/1/DataFiles/filegroup18.jar' }
+  - { filename: p10404530_112030_Linux-x86-64_1of7.zip, version: 11.2.0.3, creates: 'database/readme.html'}
+  - { filename: p10404530_112030_Linux-x86-64_2of7.zip, version: 11.2.0.3, creates: 'database/stage/Components/oracle.sysman.console.db/11.2.0.3.0/1/DataFiles/filegroup2.jar' }
+
+
+  # response file
+install_mode: INSTALL_DB_SWONLY
+oracle_home: /u01/app/oracle
+oracle_db_name: orcl
+oracle_edition: EE
+oracle_db_mem: 2048
+oracle_db_syspass: oracle
+oracle_storage_type: FILE_SYSTEM_STORAGE
+
+oracle_dba_group: 
+  - { name: dba }
+oracle_group: 
+  - {name: oinstall} 

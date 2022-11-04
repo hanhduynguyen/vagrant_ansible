@@ -1,0 +1,136 @@
+
+oracle_users:         # Passwd :Oracle123
+  - { username: oracle, uid: 54321, primgroup: oinstall, othergroups: "dba,asmadmin,asmdba,backupdba,dgdba,kmdba,oper,racdba", passwd: passwd }
+ 
+grid_users: 
+  - {primgroup: oinstall, username: grid, othergroups: dba, uid: 10002,passwd: passwd} 
+
+configure_ssh: true                
+configure_host_disks: true                                        
+configure_cluster: false
+oracle_groups:
+    - { group: asmdba, gid: 54318 }
+    - { group: asmoper, gid: 54319 }
+    - { group: asmadmin, gid: 54320 }
+    - { group: oinstall, gid: 54321 }
+    - { group: dba, gid: 54322 }
+    - { group: backupdba, gid: 54323 }
+    - { group: oper, gid: 54324 }
+    - { group: dgdba, gid: 54325 }
+    - { group: kmdba, gid: 54326 }
+    - { group: osbackupdba, gid: 54327 }
+    - { group: osdgdba, gid: 54328 }
+    - { group: racdba, gid: 54329 }
+root_user: root
+oracle_user: oracle
+grid_user: grid
+oracle_install_group: oinstall
+oraclepasswd: oracle
+gridpasswd: oracle
+
+stage_dir: /u02/stage
+oracle_base: /u01/app/oracle
+ORACLE_SID: orclcdb
+oracle_home_db: /u02/stage/oracle/21.3.0.0/dbhome_1
+ORACLE_HOME: /u02/stage/oracle/21.3.0.0/dbhome_1
+ORA_INVENTORY: /u01/oraInventory
+GRID_HOME: /u01/app/21.3.0.0/grid
+first_node: opsdev
+ansible_hostname: opsdev
+
+packages_list:
+  - compat-libcap1
+  - gcc
+  - gcc-c++
+  - glibc
+  - glibc.i686
+  - glibc-devel
+  - glibc-devel.i686
+  - ksh
+  - libaio.i686
+  - libaio-devel
+  - libaio-devel.i686
+  - libstdc++.i686
+  - libstdc++-devel
+  - libstdc++-devel.i686
+  - libXi
+  - libXi.i686
+  - libXtst
+  - libXtst.i686
+  - sysstat
+  - unixODBC
+  - unzip
+
+kernel_params:
+# Shared memory and semaphore /etc/sysctl.d/98-oracle.conf or /etc/sysctl.conf
+- { name: fs.file-max, value: 6815744 }
+- { name: kernel.sem, value: 250 32000 100 128 }
+- { name: kernel.shmmni, value: 4096 }
+- { name: kernel.shmall, value: 1073741824 }
+- { name: kernel.shmmax, value: 4398046511104 }
+- { name: kernel.panic_on_oops, value: 1 }
+- { name: net.core.rmem_default, value: 262144 }
+- { name: net.core.rmem_max, value: 4194304 }
+- { name: net.core.wmem_default, value: 262144 }
+- { name: net.core.wmem_max, value: 1048576 }
+- { name: net.ipv4.conf.all.rp_filter, value: 2 }
+- { name: net.ipv4.conf.default.rp_filter, value: 2 }
+- { name: fs.aio-max-nr, value: 1048576 }
+- { name: net.ipv4.ip_local_port_range, value: 9000 65500 }
+
+# Oracle user shell limits
+soft_no_file: 4096
+hard_no_file: 65536
+soft_nproc: 2047
+hard_nproc: 16384
+soft_stack: 10240
+hard_stack: 32768
+soft_memlock: 1887437
+hard_memlock: 1887437
+
+root_dir: /u02
+oracle_binary: /Users/duyhanhnguyen/Downloads/software/LINUX.X64_213000_db_home.zip
+oracle_stage: /u02/stage
+oracle_tmp: /tmp
+version: 21.3.0.0
+db_homes_config:
+  21300-base:
+    home: db1-base
+    version: 21.3.0.0
+    edition: EE
+oracle_sw_image_db:
+  - { filename: LINUX.X64_213000_db_home.zip, version: 21.3.0.0, creates: 'install/.img.bin' }
+  - { filename: LINUX.X64_193000_db_home.zip, version: 19.3.0.0, creates: 'install/.img.bin' }
+  - { filename: LINUX.X64_180000_db_home.zip, version: 18.3.0.0, creates: 'install/.img.bin' }
+  - { filename: linuxx64_12201_database.zip, version: 12.2.0.1, creates: 'database/runInstaller' }
+  - { filename: linuxamd64_12102_database_1of2.zip, version: 12.1.0.2, creates: 'database/stage/sizes/oracle.server.Custom.sizes.properties' }
+  - { filename: linuxamd64_12102_database_2of2.zip, version: 12.1.0.2, creates: 'database/install/.oui' }
+  - { filename: linuxamd64_12c_database_1of2.zip, version: 12.1.0.1, creates: 'database/runInstaller' }
+  - { filename: linuxamd64_12c_database_2of2.zip, version: 12.1.0.1, creates: 'database/runInstaller' }
+  - { filename: p13390677_112040_Linux-x86-64_1of7.zip, version: 11.2.0.4, creates: 'database/install/resource/cons_zh_TW.nls' }
+  - { filename: p13390677_112040_Linux-x86-64_2of7.zip, version: 11.2.0.4, creates: 'database/stage/Components/oracle.db/11.2.0.4.0/1/DataFiles/filegroup18.jar' }
+  - { filename: p10404530_112030_Linux-x86-64_1of7.zip, version: 11.2.0.3, creates: 'database/readme.html'}
+  - { filename: p10404530_112030_Linux-x86-64_2of7.zip, version: 11.2.0.3, creates: 'database/stage/Components/oracle.sysman.console.db/11.2.0.3.0/1/DataFiles/filegroup2.jar' }
+
+  # response file
+install_mode: INSTALL_DB_AND_CONFIG
+oracle_home: /u01/app/oracle/21.3.0.0
+oracle_db_name: orcl
+oracle_edition: EE
+oracle_db_mem: 2048
+oracle_db_syspass: oracle
+oracle_storage_type: FILE_SYSTEM_STORAGE
+
+oracle_dba_group: 
+  - { name: dba }
+oracle_group: 
+  - {name: oinstall} 
+
+responseFile: /tmp/db_install.rsp
+existing_oracle_databasesome: /u01/app/oracle
+
+oracle_databases: orclcdb
+autostartup_service: True
+
+
+                   
