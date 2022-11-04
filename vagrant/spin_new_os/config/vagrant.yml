@@ -1,14 +1,14 @@
 shared:
   box: oraclebase/oracle-7
   non_rotational: "on"
-  asm_crs_disk_1: /Users/duyhanhnguyen/git/vagrant/rac/ol7_19/share_storage/asm_crs_disk_1.vdi
-  asm_crs_disk_2: /Users/duyhanhnguyen/git/vagrant/rac/ol7_19/share_storage/asm_crs_disk_2.vdi
-  asm_crs_disk_3: /Users/duyhanhnguyen/git/vagrant/rac/ol7_19/share_storage/asm_crs_disk_3.vdi
-  asm_crs_disk_size: 2
-  asm_data_disk_1: /Users/duyhanhnguyen/git/vagrant/rac/ol7_19/share_storage/asm_data_disk_1.vdi
-  asm_data_disk_size: 40
-  asm_reco_disk_1: /Users/duyhanhnguyen/git/vagrant/rac/ol7_19/share_storage/asm_reco_disk_1.vdi
-  asm_reco_disk_size: 20
+  # asm_crs_disk_1: /Users/duyhanhnguyen/git/vagrant/rac/ol7_19/share_storage/asm_crs_disk_1.vdi
+  # asm_crs_disk_2: /Users/duyhanhnguyen/git/vagrant/rac/ol7_19/share_storage/asm_crs_disk_2.vdi
+  # asm_crs_disk_3: /Users/duyhanhnguyen/git/vagrant/rac/ol7_19/share_storage/asm_crs_disk_3.vdi
+  # asm_crs_disk_size: 2
+  # asm_data_disk_1: /Users/duyhanhnguyen/git/vagrant/rac/ol7_19/share_storage/asm_data_disk_1.vdi
+  # asm_data_disk_size: 40
+  # asm_reco_disk_1: /Users/duyhanhnguyen/git/vagrant/rac/ol7_19/share_storage/asm_reco_disk_1.vdi
+  # asm_reco_disk_size: 20
 
 dns:
   vm_name: ol7_19_dns
