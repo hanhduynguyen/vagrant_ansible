@@ -8,3 +8,13 @@
 to provision server (execute script after spin server)
   
     vagrant provision
+
+## 2. Setup Oracle
+
+    cd oracle_si_fs
+    vagrant up 
+## 3. Setup OGG
+
+    cd ogg
+    vagrant up 
+  
