@@ -13,6 +13,16 @@ to provision server (execute script after spin server)
 
     cd oracle_si_fs
     vagrant up 
+    
+    setup Oracle
+         ansible-playbook linux_oracle.yml -e hostgroup=myhostgroup -i inventory.yaml
+         includes 3 roles:
+            roles:
+               - linuxfororacle_prep
+               - setup
+               - oraswdb-install
+    
+    
 ## 3. Setup OGG
 
     cd ogg
