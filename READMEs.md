@@ -14,6 +14,7 @@ to provision server (execute script after spin server)
     cd oracle_si_fs
     vagrant up 
     
+    cd ~/git/oracle/hanh/vagrant_ansible/vagrant/oracle_si_fs
     setup Oracle
          ansible-playbook linux_oracle.yml -e hostgroup=myhostgroup -i inventory.yaml
          includes 3 roles:
