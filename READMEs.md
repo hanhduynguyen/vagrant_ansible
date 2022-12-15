@@ -19,9 +19,9 @@ to provision server (execute script after spin server)
          ansible-playbook linux_oracle.yml -e hostgroup=myhostgroup -i inventory.yaml
          includes 3 roles:
             roles:
-               - linuxfororacle_prep
-               - setup
-               - oraswdb-install
+               - linuxfororacle_prep. -> prepare oracle installation
+               - setup -> Install Oracle software 
+               - oraswdb-install -> Create DB and listener, tnsnames
     
     
 ## 3. Setup OGG
