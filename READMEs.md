@@ -29,3 +29,5 @@ to provision server (execute script after spin server)
     cd ogg
     vagrant up 
   
+    cd ~/git/oracle/hanh/vagrant_ansible/vagrant/oracle_si_fs
+    ansible-playbook setup_ogg.yaml -i inventory.yml 
